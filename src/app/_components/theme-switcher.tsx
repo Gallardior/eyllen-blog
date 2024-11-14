@@ -7,10 +7,10 @@ declare global {
   var updateDOM: () => void;
 }
 
-type ColorSchemePreference = "system" | "dark" | "light";
+type ColorSchemePreference = "dark" | "light";
 
 const STORAGE_KEY = "nextjs-blog-starter-theme";
-const modes: ColorSchemePreference[] = ["system", "dark", "light"];
+const modes: ColorSchemePreference[] = ["dark", "light"];
 
 /** to reuse updateDOM function defined inside injected script */
 
@@ -84,11 +84,22 @@ const Switch = () => {
     setMode(modes[(index + 1) % modes.length]);
   };
   return (
-    <button
-      suppressHydrationWarning
-      className={styles.switch}
-      onClick={handleModeSwitch}
-    />
+    <>
+      {/* <button
+        suppressHydrationWarning
+        className={styles.switch}
+        onClick={handleModeSwitch}
+      /> */}
+      <form className='flex items-center gap-2'>
+        <i className='fa-solid fa-sun text-xl text-orange-300' />
+        <label className='relative inline-flex items-center cursor-pointer'>
+          <input type='checkbox' className='sr-only peer' checked={mode === 'dark'} onClick={handleModeSwitch} />
+          <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 dark:peer-focus:ring-blue-800 dark:bg-gray-700 peer-checked:after:translate-x-full rtl:peer-checked:after:-translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:start-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all dark:border-gray-600 peer-checked:bg-blue-600" />
+        </label>
+        <i className='fa-solid fa-moon text-xl text-purple-700 dark:text-purple-400' />
+      </form>
+
+    </>
   );
 };
 
